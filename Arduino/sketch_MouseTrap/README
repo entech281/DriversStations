@@ -1,0 +1,5 @@
+This is the Arduino sketch for MouseTrap
+
+It differs from the Simple sketch in some special handling
+of buttons 2,3 & 6 (zero based) which are inverted versus
+the other buttons due to the wiring.

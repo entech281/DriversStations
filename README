@@ -1,0 +1,9 @@
+Code for the drivers station.  Probably just arduino code since that's
+what we tend to prefer; but if the operator panel controller changes
+there might be some other code working its way in here.
+
+Useful Arduino Links:
+
+https://www.arduino.cc/en/Guide/Libraries
+http://www.instructables.com/id/Arduino-LeonardoMicro-as-Game-ControllerJoystick/
+https://github.com/MHeironimus/ArduinoJoystickLibrary/tree/version-2.0
