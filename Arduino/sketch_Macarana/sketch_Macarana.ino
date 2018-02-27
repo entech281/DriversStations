@@ -32,6 +32,12 @@ void loop() {
   for (int index = 0; index < 13; index++)
   {
     int currentButtonState = !digitalRead(index);
+    if ((index == 12) || (lastButtonState[index-1])) {
+      currentButtonState = !currentButtonState;
+    }
+    if ((index == 10) || (lastButtonState[index-1])) {
+      currentButtonState = !currentButtonState;
+    }
     if (currentButtonState != lastButtonState[index])
     {
       Joystick.setButton(index, currentButtonState);

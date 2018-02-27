@@ -1,0 +1,8 @@
+This is the Arduino sketch for the simpliest case.  It tracks
+up to 13 buttons and 4 analog axes.
+
+The code for buttons 10 & 12 are designed for a 3 position
+switch where the bottom button activated is "off", middle
+position is ramp deployment, and the top position is lift
+ramp.  The middle and top positions should not be on at the
+same time.
