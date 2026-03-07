@@ -15,10 +15,22 @@ int inputType[16];
 #define TYPE_BUTTON    0
 #define TYPE_ENCODER   1
 
-#define ENCODER_1_CLK  2
-#define ENCODER_1_DT   3
+#ifndef ENCODER_1
+#define ENCODER_1
+#endif
+#ifdef ENCODER_2
+#undef ENCODER_2
+#endif
+
+#ifdef ENCODER_1
+#define ENCODER_1_CLK  7
+#define ENCODER_1_DT   8
+#endif
+
+#ifdef ENCODER_2
 #define ENCODER_2_CLK  4
 #define ENCODER_2_DT   5
+#endif
 
 void setup() {
    for (int index=0; index < 16; ++index) {
@@ -27,10 +39,14 @@ void setup() {
       lastButtonState[index] = 0;
       lastRawButtonState[index] = digitalRead(index);
    }
+#ifdef ENCODER_1
    inputType[ENCODER_1_CLK] = TYPE_ENCODER;
    inputType[ENCODER_1_DT ] = TYPE_ENCODER;
+#endif
+#ifdef ENCODER_2
    inputType[ENCODER_2_CLK] = TYPE_ENCODER;
    inputType[ENCODER_2_DT ] = TYPE_ENCODER;
+#endif
 
    Joystick.begin();
 }
@@ -57,6 +73,7 @@ void loop() {
    Joystick.setRudder(analogRead(A3));
 
    // Now for each encoder (note the raw button states were read while handling the buttons
+#ifdef ENCODER_1
    if ((currentRawButtonState[ENCODER_1_CLK] != lastRawButtonState[ENCODER_1_CLK]) && (currentRawButtonState[ENCODER_1_CLK])) {
       if (currentRawButtonState[ENCODER_1_DT] == HIGH) {
          // CCW: Button press on CLK pin
@@ -78,6 +95,8 @@ void loop() {
          }
       }
    }
+#endif
+#ifdef ENCODER_2
    if ((currentRawButtonState[ENCODER_2_CLK] != lastRawButtonState[ENCODER_2_CLK]) && (currentRawButtonState[ENCODER_2_CLK])) {
       if (currentRawButtonState[ENCODER_2_DT] == HIGH) {
          // CCW: Button press on CLK pin
@@ -99,6 +118,7 @@ void loop() {
          }
       }
    }
+#endif
 
    // transfer raw button state
    for (int index = 0; index < 16; ++index) {
